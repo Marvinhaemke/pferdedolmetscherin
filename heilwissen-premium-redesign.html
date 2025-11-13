@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heilwissen für Mensch und Pferd - Live-Show mit Nicole Luzar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-orange: #FF8534;
+            --dark-navy: #1a2940;
+            --light-purple: #e8e3f3;
+            --accent-gold: #d4a574;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-gray: #555555;
+            --gradient-orange: linear-gradient(135deg, #FF8534 0%, #ff6b1a 100%);
+            --gradient-navy: linear-gradient(135deg, #1a2940 0%, #2d4264 100%);
+            --gradient-purple: linear-gradient(135deg, #e8e3f3 0%, #d4c9e8 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 41, 64, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 0.75rem 5%;
+            background: rgba(26, 41, 64, 1);
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+        }
+
+        .header-cta {
+            background: var(--gradient-orange);
+            color: var(--white);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(255, 133, 52, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .header-cta:hover::before {
+            left: 100%;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(255, 133, 52, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-navy);
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 133, 52, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 165, 116, 0.1) 0%, transparent 50%);
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            align-items: center;
+        }
+
+        .hero-content {
+            color: var(--white);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 133, 52, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 133, 52, 0.4);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: var(--primary-orange);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero h1 .highlight {
+            background: var(--gradient-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero .author {
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.8;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .primary-cta {
+            background: var(--gradient-orange);
+            color: var(--white);
+            padding: 1.25rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px rgba(255, 133, 52, 0.4);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        
+
+        .primary-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(255, 133, 52, 0.5);
+        }
+
+        .secondary-cta {
+            background: transparent;
+            color: var(--white);
+            padding: 1.25rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .secondary-cta:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-image-container {
+            position: relative;
+            animation: fadeInRight 1s ease-out 0.4s both;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-image {
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .hero-image-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-badge-1 {
+            bottom: -20px;
+            right: -20px;
+            text-align: center;
+        }
+
+        .floating-badge-1 .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-orange);
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1;
+        }
+
+        .floating-badge-1 .label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            background: var(--white);
+            padding: 2rem 5%;
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .trust-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .trust-logos {
+            
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .trust-logo img {
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .trust-logo {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .trust-logo:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--primary-orange);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 2px solid #f0f0f0;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-orange);
+            transform: scaleY(0);
+            transition: transform 0.4s ease;
+        }
+
+        .problem-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .problem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-orange);
+        }
+
+        .problem-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-orange);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 20px rgba(255, 133, 52, 0.3);
+        }
+
+        .problem-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .problem-card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* Video CTA Section */
+        .video-cta-section {
+            padding: 6rem 5%;
+            background: var(--gradient-purple);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 133, 52, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-placeholder {
+            background: linear-gradient(135deg, var(--dark-navy) 0%, #2d4264 100%);
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .play-button {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(255, 133, 52, 0.4);
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(255, 133, 52, 0.5);
+        }
+
+        .video-cta-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-cta-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .video-cta-content .highlight {
+            color: var(--primary-orange);
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 3rem;
+            border-radius: 30px;
+            border: 2px solid #f0f0f0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 133, 52, 0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .benefit-card:hover::after {
+            opacity: 1;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary-orange);
+        }
+
+        .benefit-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-orange);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 6px 20px rgba(255, 133, 52, 0.3);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .benefit-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Content Preview */
+        .content-preview {
+            padding: 6rem 5%;
+            background: var(--dark-navy);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-preview::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(255, 133, 52, 0.1) 0%, transparent 100%);
+        }
+
+        .content-preview .section-header {
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-preview .section-label {
+            color: var(--primary-orange);
+        }
+
+        .content-preview h2 {
+            color: var(--white);
+        }
+
+        .content-preview p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 133, 52, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-card-image {
+            height: 220px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .content-card-body {
+            padding: 2rem;
+        }
+
+        .content-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .content-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 6rem 5%;
+            background: var(--gradient-purple);
+            position: relative;
+        }
+
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--primary-orange) 50%, transparent 100%);
+        }
+
+        .form-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 4rem;
+            border-radius: 40px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .form-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-orange);
+            border-radius: 40px;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .form-wrapper h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            padding: 1rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(255, 133, 52, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 0.25rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            cursor: pointer;
+        }
+
+        .form-submit {
+            background: var(--gradient-orange);
+            color: var(--white);
+            padding: 1.25rem 3rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px rgba(255, 133, 52, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(255, 133, 52, 0.5);
+        }
+
+        .form-info {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 133, 52, 0.1) 0%, rgba(212, 165, 116, 0.1) 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 133, 52, 0.2);
+        }
+
+        .form-info strong {
+            display: block;
+            color: var(--primary-orange);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-info p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 2px solid #f0f0f0;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            font-size: 5rem;
+            color: var(--primary-orange);
+            opacity: 0.2;
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary-orange);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.3rem;
+            box-shadow: 0 6px 20px rgba(255, 133, 52, 0.3);
+        }
+
+        .testimonial-info h4 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-stars {
+            color: var(--primary-orange);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-gray);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 6rem 5%;
+            background: var(--gradient-navy);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 133, 52, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image {
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .about-image-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .about-badge {
+            position: absolute;
+            top: 30px;
+            right: -30px;
+            background: var(--gradient-orange);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(255, 133, 52, 0.4);
+            text-align: center;
+        }
+
+        .about-badge .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1;
+            display: block;
+        }
+
+        .about-badge .label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .about-content h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .about-content .highlight {
+            color: var(--primary-orange);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .credentials-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .credential-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .credential-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 133, 52, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .credential-item span {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .about-cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-orange);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.05rem;
+        }
+
+        .faq-question::after {
+            content: '→';
+            font-size: 1.5rem;
+            color: var(--primary-orange);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item:hover .faq-question::after {
+            transform: translateX(5px);
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 6rem 5%;
+            background: var(--gradient-purple);
+            text-align: center;
+        }
+
+        .final-cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .final-cta .highlight {
+            color: var(--primary-orange);
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .urgency-banner {
+            background: var(--gradient-orange);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(255, 133, 52, 0.3);
+        }
+
+        .urgency-banner strong {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-navy);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid,
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-badge-1 {
+                position: static;
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem 4%;
+            }
+
+            .header-cta {
+                display: none;
+            }
+
+            .hero {
+                padding: 6rem 4% 3rem;
+                padding-top: 8rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-cta-group {
+                flex-direction: column;
+            }
+
+            .primary-cta,
+            .secondary-cta {
+                width: 100%;
+                text-align: center;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .form-wrapper {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .problem-grid,
+            .content-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+             <img src="6d8efaf9b2a3d99a07d144909b3763f6.png" alt="Die Pferdedolmetscherin Logo" style="height: 50px; padding: 0 0; margin: 0;">
+        </div>
+        <a href="#anmeldung" class="header-cta">Jetzt Platz sichern</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge">Kostenfreie Live-Show</div>
+                <h1>Verstehe dein Pferd in <span class="highlight">100 Minuten</span> und löse Probleme, für die kein Tierarzt eine Lösung findet</h1>
+                <p class="subtitle">Entdecke die einzigartige FTA-Methode und lerne, die wahren Ursachen hinter den Gesundheits- und Verhaltensproblemen deines Pferdes zu erkennen.</p>
+                <p class="author">Mit Nicole Luzar – Diplom-Biologin & Expertin für energetische Pferdekommunikation seit über 15 Jahren</p>
+                <div class="hero-cta-group">
+                    <a href="#anmeldung" class="primary-cta">Kostenlos anmelden</a>
+                    <a href="#mehr-erfahren" class="secondary-cta">Mehr erfahren</a>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <div class="hero-image">
+                    <img src="Nicole-Pferdedolmetscherin-mit_Pferd.jpg" alt="Nicole Luzar mit Pferd - Nase an Nase" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="floating-badge floating-badge-1">
+                    <div class="number">600+</div>
+                    <div class="label">Zufriedene<br>Pferdebesitzer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="trust-content">
+            <span class="trust-label">Bekannt aus</span>
+            <div class="trust-logos">
+                <div class="trust-logo"><img src="d8032593c5a62029ec1f8c71df1ff34d.jpg" alt="Hamburg 1" ></div>
+                <div class="trust-logo"><img src="7cf71bfd6a14a13157ab925c8ad8227e.jpg" alt="RheinMain TV"></div>
+                <div class="trust-logo"><img src="eb454c7898ce1cbf1327137a30f0c736.png" alt="Pferdekult"></div>
+                <div class="trust-logo"><img src="8f30c23212ab10806ca78f474d2739d5.png" alt="Kompetenz Zirkel Pferd"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem Section -->
+    <section class="problem-section" id="mehr-erfahren">
+        <div class="section-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Kennst du das?</span>
+                <h2>Probleme, die kein Tierarzt lösen kann</h2>
+                <p>Diese Herausforderungen kennen viele Pferdebesitzer – doch es gibt Wege, die wahren Ursachen zu finden.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card scroll-reveal">
+                    <div class="problem-icon">🏥</div>
+                    <h3>Ständige Krankheit</h3>
+                    <p>Dein Pferd ist ständig krank, zeigt Unwohlsein und der Tierarzt findet keine Ursache?</p>
+                </div>
+                <div class="problem-card scroll-reveal">
+                    <div class="problem-icon">🚫</div>
+                    <h3>Nicht mehr reitbar</h3>
+                    <p>Dein Pferd ist plötzlich nicht mehr reitbar, obwohl der Tierarzt nichts findet?</p>
+                </div>
+                <div class="problem-card scroll-reveal">
+                    <div class="problem-icon">❓</div>
+                    <h3>Verhaltensänderungen</h3>
+                    <p>Dein Pferd verhält sich plötzlich anders und du weißt nicht warum?</p>
+                </div>
+                <div class="problem-card scroll-reveal">
+                    <div class="problem-icon">🔍</div>
+                    <h3>Nur Symptome</h3>
+                    <p>Der Tierarzt findet nur die Symptome – aber nie die wahren Ursachen?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video CTA Section -->
+    <section class="video-cta-section">
+        <div class="section-container">
+            <div class="video-cta-content scroll-reveal">
+                <h2>Was dich in meiner <span class="highlight">KOSTENFREIEN Live-Show</span> erwartet:</h2>
+            </div>
+            <div class="video-container scroll-reveal">
+                <div class="video-placeholder" style="background-image: url('Thumbnail-LS_Solvejg-2.jpg'); background-size: cover; background-position: center;">
+                    <div class="play-button">▶</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="section-container">
+            <div class="video-cta-content scroll-reveal">
+                <h2>In meiner <span class="highlight">KOSTENFREIEN Live-Show</span> erfährst du:</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-number">1</div>
+                    <h3>Die einzigartige FTA-Methode</h3>
+                    <p>Wie du mit der revolutionären FTA-Methode (Fragen + Testen = Antwort) deinem Pferd hilfst, für ein glücklicheres, gesünderes Pferdeleben</p>
+                </div>
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-number">2</div>
+                    <h3>Wahre Ursachen entdecken</h3>
+                    <p>Wie du die wahren Ursachen für Probleme deines Pferdes entdeckst, damit du schneller und effektiver helfen kannst</p>
+                </div>
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-number">3</div>
+                    <h3>Zusammenhänge erkennen</h3>
+                    <p>Wie du die oft komplizierten Zusammenhänge erkennst und mit einfachen Handlungsempfehlungen für deine spezifische Situation umgehst</p>
+                </div>
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-number">4</div>
+                    <h3>Bewährte Strategien</h3>
+                    <p>Wie du einfach zu nutzende Strategien anwendest für typische Pferde-Probleme ohne komplizierten Schnickschnack</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Preview -->
+    <section class="content-preview">
+        <div class="section-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Das erwartet dich</span>
+                <h2>100 Minuten geballtes Heilwissen</h2>
+                <p>Eine transformative Live-Erfahrung, die dein Verständnis für dein Pferd revolutionieren wird</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card scroll-reveal">
+                    <div class="content-card-image" style="background-image: url('Thumbnail-LS_Solvejg-2.jpg'); background-size: cover; background-position: center;"></div>
+                    <div class="content-card-body">
+                        <h3>30-minütige FTA-Gruppen-Sitzung</h3>
+                        <p>Ich zeige dir genau, wie die FTA-Methode funktioniert. Beantworte live Fragen, finde Ursachen und unterstütze dein Pferd</p>
+                    </div>
+                </div>
+                <div class="content-card scroll-reveal">
+                    <div class="content-card-image" style="background-image: url('Nicole-Pferdedolmetscherin-mit_Pferd.jpg'); background-size: cover; background-position: center;"></div>
+                    <div class="content-card-body">
+                        <h3>Individuelle Lösungen</h3>
+                        <p>In einem ausführlichen Q&A-Teil beantworte ich deine spezifischen Fragen zu den Herausforderungen mit deinem Pferd</p>
+                    </div>
+                </div>
+                <div class="content-card scroll-reveal">
+                    <div class="content-card-image" style="background-image: url('b1bf58d51caf67328a8a7fa19e11dc6d.jpg'); background-size: cover; background-position: center;"></div>
+                    <div class="content-card-body">
+                        <h3>Praktische Handlungsempfehlungen</h3>
+                        <p>Konkrete, sofort umsetzbare Strategien für häufige Pferde-Probleme</p>
+                    </div>
+                </div>
+                <div class="content-card scroll-reveal">
+                    <div class="content-card-image" style="background-image: url('Pferd_verladen.jpg'); background-size: cover; background-position: center;"></div>
+                    <div class="content-card-body">
+                        <h3>Fallstudien aus der Praxis</h3>
+                        <p>Ergebnisse meiner Klientinnen und wie sie chronische Probleme lösen konnten</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="anmeldung">
+        <div class="form-wrapper scroll-reveal">
+            <h2>Sichere dir jetzt deinen Platz!</h2>
+            <p class="form-subtitle">Trage einfach deinen Namen und deine E-Mail ein, und du bist sofort dabei</p>
+            
+            <form class="form">
+                <div class="form-group">
+                    <label>Vorname *</label>
+                    <input type="text" required placeholder="Dein Vorname">
+                </div>
+                <div class="form-group">
+                    <label>E-Mail *</label>
+                    <input type="email" required placeholder="Deine E-Mail-Adresse">
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="privacy" required>
+                    <label for="privacy">Ja, ich akzeptiere die Datenschutzerklärung und stimme zu, dass meine Daten zur Bearbeitung meiner Anfrage gespeichert werden.</label>
+                </div>
+                <button type="submit" class="form-submit">Jetzt kostenlos anmelden</button>
+            </form>
+            
+            <div class="form-info">
+                <strong>📅 Live am 13. November um 20:00 Uhr per Zoom</strong>
+                <p>⚠️ Sei unbedingt live dabei, denn es gibt keine Aufzeichnung!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="section-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Erfahrungen</span>
+                <h2>Was Pferdebesitzer sagen</h2>
+                <p>Über 600 zufriedene Klientinnen vertrauen auf die FTA-Methode</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card scroll-reveal">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">SZ</div>
+                        <div class="testimonial-info">
+                            <h4>Sabine Z.</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">Seit der Kommunikation mit Nicole ist meine Stute viel entspannter, vertrauter und auch bewusster mit mir als 'Leittier' an meiner Seite. Ich sehe nun, dass 'schlechtes Benehmen' bei ihr oftmals 'Schmerz' bedeutet.</p>
+                </div>
+                <div class="testimonial-card scroll-reveal">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">IM</div>
+                        <div class="testimonial-info">
+                            <h4>Inge M.</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">Eine Tierkommunikation mit meinem Pferd kann nur empfohlen werden! Mein Pferd ist seit Wochen wieder rittiger und entspannt! Ich bin über den Erfolg sehr erstaunt!</p>
+                </div>
+                <div class="testimonial-card scroll-reveal">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">KM</div>
+                        <div class="testimonial-info">
+                            <h4>Katrin M.</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">Die FTA-Methode hat mir geholfen, endlich die Ursache für die chronischen Probleme meines Pferdes zu finden. Wir sind beide jetzt viel glücklicher!</p>
+                </div>
+                <div class="testimonial-card scroll-reveal">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">AS</div>
+                        <div class="testimonial-info">
+                            <h4>Anna S.</h4>
+                            <div class="testimonial-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">Nicole hat eine unglaubliche Gabe, Pferde zu verstehen. Die Live-Show war der Anfang einer wunderbaren Reise zu einem besseren Verständnis meines Pferdes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-grid">
+            <div class="about-image-wrapper scroll-reveal">
+                <div class="about-image">
+                    <img src="Nicole_mit_Dublin.jpg" alt="Nicole Luzar mit Dublin" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="about-badge">
+                    <span class="number">15+</span>
+                    <span class="label">Jahre Erfahrung</span>
+                </div>
+            </div>
+            <div class="about-content scroll-reveal">
+                <h2>Über <span class="highlight">Nicole Luzar</span></h2>
+                <p class="about-text">Seit 2010 verbinde ich als Diplom-Biologin und Entwicklerin der FTA-Methode Neurobiologie mit energetischen Techniken, um Pferdebesitzern, Reitern, aber auch Therapeuten, Tierärzten oder Tierheilpraktikern eine systematische Methode an die Hand zu geben.</p>
+                <p class="about-text">Meine Arbeit wurde unter anderem vom "Kompetenzzirkel Pferd", auf pferde.de und pferdekult.de portraitiert und in Medien wie hr2, RheinMain TV und hamburg 1 vorgestellt.</p>
+                
+                <div class="credentials-list">
+                    <div class="credential-item">
+                        <div class="credential-icon">🎓</div>
+                        <span>Diplom-Biologin</span>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon">🔬</div>
+                        <span>Entwicklerin der FTA-Methode</span>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon">📺</div>
+                        <span>Medien-Expertin (hr2, Hamburg 1, RheinMain TV)</span>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon">✨</div>
+                        <span>600+ zufriedene Pferdebesitzer</span>
+                    </div>
+                </div>
+
+                <div class="about-cta-group">
+                    <a href="#anmeldung" class="primary-cta">Jetzt anmelden</a>
+                    <a href="#" class="secondary-cta">Mehr über mich</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Fragen & Antworten</span>
+                <h2>Häufig gestellte Fragen</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">Was ist, wenn ich keinen Zoom-Link erhalte?</div>
+                </div>
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">Kann ich auch später zuschauen, wenn ich es zeitlich nicht schaffe?</div>
+                </div>
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">Gibt es eine Möglichkeit, meine spezifischen Pferdeprobleme direkt zu besprechen?</div>
+                </div>
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">Wie kann mir die Show helfen, wenn ich schon viel ausprobiert habe?</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="final-cta-content scroll-reveal">
+            <h2>Bereit, dein Pferd <span class="highlight">wirklich zu verstehen?</span></h2>
+            <p>Verpasse nicht diese einmalige Gelegenheit, die FTA-Methode kennenzulernen und endlich Klarheit über die Probleme deines Pferdes zu bekommen.</p>
+            
+            <div class="urgency-banner">
+                <strong>⏰ Live am 13. November um 20:00 Uhr per Zoom</strong>
+                <p style="margin-bottom: 0; color: white;">Sei unbedingt live dabei, denn es gibt keine Aufzeichnung!</p>
+            </div>
+            
+            <a href="#anmeldung" class="primary-cta">Jetzt kostenlos anmelden</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Impressum</a>
+                <a href="#">Datenschutz</a>
+                <a href="#">Kontakt</a>
+            </div>
+            <p class="footer-copyright">© 2025 Nicole Luzar – Die Pferdedolmetscherin. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Vielen Dank für deine Anmeldung! Du erhältst in Kürze den Zoom-Link per E-Mail.');
+        });
+    </script>
+</body>
+</html>
