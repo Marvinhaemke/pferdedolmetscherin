@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heilwissen für Mensch und Pferd - Nicole Luzar</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#2C3E31',    /* Dark Forest Green */
+                            primary: '#5B7B63', /* Sage Green */
+                            light: '#A8C3B0',   /* Light Sage */
+                            accent: '#D4A373',  /* Earthy Gold/Brown */
+                            cream: '#F9F7F2',   /* Paper Cream */
+                            white: '#FFFFFF',
+                            text: '#2D3748',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(249, 247, 242, 0.95) 0%, rgba(249, 247, 242, 0.8) 50%, rgba(249, 247, 242, 0) 100%);
+        }
+        @media (max-width: 768px) {
+            .hero-overlay {
+                background: linear-gradient(to bottom, rgba(249, 247, 242, 0.95) 60%, rgba(249, 247, 242, 0.4) 100%);
+            }
+        }
+        .clip-shape-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
+        }
+    </style>
+</head>
+<body class="font-sans text-brand-text bg-brand-cream antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2">
+                <img src="https://pferdedolmetscherin.vercel.app/6d8efaf9b2a3d99a07d144909b3763f6.png" alt="Logo" class="h-10 w-auto">
+                <span class="font-serif font-bold text-xl text-brand-dark hidden sm:block">Die Pferdedolmetscherin</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#probleme" class="text-brand-dark hover:text-brand-primary transition font-medium">Probleme</a>
+                <a href="#methode" class="text-brand-dark hover:text-brand-primary transition font-medium">Methode</a>
+                <a href="#ueber-mich" class="text-brand-dark hover:text-brand-primary transition font-medium">Über Mich</a>
+                <a href="#testimonials" class="text-brand-dark hover:text-brand-primary transition font-medium">Erfahrungen</a>
+                <a href="#anmeldung" class="bg-brand-primary text-white px-6 py-2.5 rounded-full hover:bg-brand-dark transition shadow-lg transform hover:-translate-y-0.5">
+                    Kostenlos anmelden
+                </a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-brand-dark text-2xl" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t absolute w-full">
+            <div class="flex flex-col p-4 space-y-4">
+                <a href="#probleme" class="text-brand-dark font-medium">Probleme</a>
+                <a href="#methode" class="text-brand-dark font-medium">Methode</a>
+                <a href="#ueber-mich" class="text-brand-dark font-medium">Über Mich</a>
+                <a href="#anmeldung" class="bg-brand-primary text-white px-4 py-2 rounded-full text-center">Kostenlos anmelden</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center pt-20">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://pferdedolmetscherin.vercel.app/Nicole-Pferdedolmetscherin-mit_Pferd.jpg" 
+                 alt="Nicole Luzar mit Pferd" 
+                 class="w-full h-full object-cover object-center">
+        </div>
+        
+        <!-- Content Overlay -->
+        <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 h-full items-center">
+            <div class="bg-brand-cream/95 p-8 md:p-12 rounded-xl shadow-2xl border-l-4 border-brand-primary backdrop-blur-sm mt-10 md:mt-0">
+                <span class="inline-block bg-brand-accent/20 text-brand-dark px-3 py-1 rounded-full text-sm font-semibold tracking-wide mb-4 uppercase">
+                    Kostenfreie Live-Show
+                </span>
+                <h1 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-brand-dark leading-tight mb-6">
+                    Verstehe dein Pferd in 100 Minuten & löse Probleme, für die kein Tierarzt eine Lösung findet.
+                </h1>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                    Entdecke die einzigartige <strong class="text-brand-primary">FTA-Methode</strong> und lerne, die wahren Ursachen hinter den Gesundheits- und Verhaltensproblemen deines Pferdes zu erkennen.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#anmeldung" class="bg-brand-primary text-white text-center px-8 py-4 rounded-full font-semibold hover:bg-brand-dark transition shadow-lg flex items-center justify-center gap-2 group">
+                        <span>Jetzt Platz sichern</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    </a>
+                    <a href="#methode" class="border-2 border-brand-primary text-brand-primary text-center px-8 py-4 rounded-full font-semibold hover:bg-brand-primary hover:text-white transition flex items-center justify-center">
+                        Mehr erfahren
+                    </a>
+                </div>
+                <div class="mt-8 flex items-center gap-4 text-sm text-gray-500">
+                    <div class="flex -space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
+                        <div class="w-8 h-8 rounded-full bg-gray-400 border-2 border-white"></div>
+                        <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-white"></div>
+                    </div>
+                    <p>600+ Zufriedene Pferdebesitzer</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bekannt aus -->
+    <section class="py-10 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 text-sm uppercase tracking-widest mb-6 font-semibold">Bekannt aus</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="https://pferdedolmetscherin.vercel.app/d8032593c5a62029ec1f8c71df1ff34d.jpg" alt="Hamburg 1" class="h-12 object-contain">
+                <img src="https://pferdedolmetscherin.vercel.app/7cf71bfd6a14a13157ab925c8ad8227e.jpg" alt="RheinMain TV" class="h-12 object-contain">
+                <img src="https://pferdedolmetscherin.vercel.app/eb454c7898ce1cbf1327137a30f0c736.png" alt="Pferdekult" class="h-8 object-contain">
+                <img src="https://pferdedolmetscherin.vercel.app/8f30c23212ab10806ca78f474d2739d5.png" alt="Kompetenz Zirkel" class="h-12 object-contain">
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points -->
+    <section id="probleme" class="py-20 bg-brand-cream">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-primary font-semibold tracking-wide uppercase">Kennst du das?</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mt-2 mb-4">Probleme, die kein Tierarzt lösen kann</h2>
+                <p class="text-gray-600">Diese Herausforderungen kennen viele Pferdebesitzer – doch es gibt Wege, die wahren Ursachen zu finden.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition duration-300 border-t-4 border-red-400">
+                    <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center text-red-500 text-2xl mb-6">
+                        <i class="fas fa-hospital-alt"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-brand-dark mb-3">Ständige Krankheit</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Dein Pferd ist ständig krank, zeigt Unwohlsein und der Tierarzt findet keine Ursache?</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition duration-300 border-t-4 border-orange-400">
+                    <div class="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 text-2xl mb-6">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-brand-dark mb-3">Nicht mehr reitbar</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Dein Pferd ist plötzlich nicht mehr reitbar, obwohl der Tierarzt nichts findet?</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition duration-300 border-t-4 border-yellow-400">
+                    <div class="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 text-2xl mb-6">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-brand-dark mb-3">Verhaltensänderungen</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Dein Pferd verhält sich plötzlich anders und du weißt nicht warum?</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition duration-300 border-t-4 border-brand-primary">
+                    <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center text-brand-primary text-2xl mb-6">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-brand-dark mb-3">Nur Symptome</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Der Tierarzt findet nur die Symptome – aber nie die wahren Ursachen?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions / Methode -->
+    <section id="methode" class="py-20 bg-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-brand-light/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-brand-accent/10 rounded-full blur-3xl"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-12">
+                    <div>
+                        <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-6">In meiner KOSTENFREIEN Live-Show erfährst du:</h2>
+                        <p class="text-gray-600 text-lg">Ein tiefer Einblick in die Welt der energetischen Pferdekommunikation.</p>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold">1</div>
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">Die einzigartige FTA-Methode</h3>
+                                <p class="text-gray-600">Wie du mit der revolutionären FTA-Methode (Fragen + Testen = Antwort) deinem Pferd hilfst, für ein glücklicheres, gesünderes Pferdeleben.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold">2</div>
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">Wahre Ursachen entdecken</h3>
+                                <p class="text-gray-600">Wie du die wahren Ursachen für Probleme deines Pferdes entdeckst, damit du schneller und effektiver helfen kannst.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold">3</div>
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">Zusammenhänge erkennen</h3>
+                                <p class="text-gray-600">Wie du die oft komplizierten Zusammenhänge erkennst und mit einfachen Handlungsempfehlungen für deine spezifische Situation umgehst.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video/Image Placeholder or Graphic -->
+                <div class="relative">
+                    <div class="bg-brand-cream rounded-3xl p-8 border border-brand-light shadow-xl transform rotate-2 hover:rotate-0 transition duration-500">
+                        <h3 class="font-serif text-2xl font-bold text-brand-dark mb-6 text-center">100 Minuten geballtes Heilwissen</h3>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="bg-white p-4 rounded-xl flex items-center gap-4 shadow-sm">
+                                <i class="fas fa-users text-brand-primary text-xl"></i>
+                                <span class="font-medium text-brand-dark">30-minütige FTA-Gruppen-Sitzung</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl flex items-center gap-4 shadow-sm">
+                                <i class="fas fa-comments text-brand-primary text-xl"></i>
+                                <span class="font-medium text-brand-dark">Individuelle Lösungen (Q&A)</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl flex items-center gap-4 shadow-sm">
+                                <i class="fas fa-clipboard-check text-brand-primary text-xl"></i>
+                                <span class="font-medium text-brand-dark">Praktische Handlungsempfehlungen</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl flex items-center gap-4 shadow-sm">
+                                <i class="fas fa-book-open text-brand-primary text-xl"></i>
+                                <span class="font-medium text-brand-dark">Fallstudien aus der Praxis</span>
+                            </div>
+                        </div>
+                        <div class="mt-8 text-center">
+                            <p class="text-brand-accent font-bold animate-pulse">⚠️ Keine Aufzeichnung verfügbar!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="ueber-mich" class="py-20 bg-brand-dark text-white clip-shape-bottom relative">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <img src="https://pferdedolmetscherin.vercel.app/Nicole_mit_Dublin.jpg" 
+                         alt="Nicole Luzar mit Dublin" 
+                         class="rounded-2xl shadow-2xl border-4 border-white/10 w-full object-cover h-[500px]">
+                </div>
+                <div class="order-1 lg:order-2">
+                    <span class="text-brand-light uppercase tracking-wider font-semibold">Über Nicole Luzar</span>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold mt-2 mb-6">15+ Jahre Erfahrung als Brücke zwischen Mensch und Pferd</h2>
+                    <p class="text-brand-light/80 text-lg mb-6 leading-relaxed">
+                        Seit 2010 verbinde ich als Diplom-Biologin und Entwicklerin der FTA-Methode Neurobiologie mit energetischen Techniken, um Pferdebesitzern, Reitern, aber auch Therapeuten eine systematische Methode an die Hand zu geben.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-graduation-cap text-brand-accent text-2xl"></i>
+                            <span class="font-medium">Diplom-Biologin</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-microscope text-brand-accent text-2xl"></i>
+                            <span class="font-medium">FTA-Entwicklerin</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-tv text-brand-accent text-2xl"></i>
+                            <span class="font-medium">Medien-Expertin</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-star text-brand-accent text-2xl"></i>
+                            <span class="font-medium">600+ Zufriedene Klienten</span>
+                        </div>
+                    </div>
+                    <a href="#" class="text-brand-accent border-b border-brand-accent hover:text-white hover:border-white transition pb-1 inline-block">Mehr über mich lesen</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 bg-brand-cream">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-16">Was Pferdebesitzer sagen</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-left">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Seit der Kommunikation mit Nicole ist meine Stute viel entspannter, vertrauter und auch bewusster mit mir als 'Leittier' an meiner Seite. Ich sehe nun, dass 'schlechtes Benehmen' bei ihr oftmals 'Schmerz' bedeutet."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center text-brand-dark font-bold">SZ</div>
+                        <div>
+                            <h4 class="font-bold text-brand-dark">Sabine Z.</h4>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Testimonial 2 -->
+                 <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Eine Tierkommunikation mit meinem Pferd kann nur empfohlen werden! Mein Pferd ist seit Wochen wieder rittiger und entspannt! Ich bin über den Erfolg sehr erstaunt!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center text-brand-dark font-bold">IM</div>
+                        <div>
+                            <h4 class="font-bold text-brand-dark">Inge M.</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <h2 class="font-serif text-3xl font-bold text-brand-dark text-center mb-10">Häufig gestellte Fragen</h2>
+            <div class="space-y-4">
+                <!-- Item 1 -->
+                <details class="group border border-gray-200 rounded-lg bg-brand-cream open:bg-white transition-colors duration-300">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 font-medium text-brand-dark list-none">
+                        <span>Was ist, wenn ich keinen Zoom-Link erhalte?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="group-open:animate-fadeIn px-6 pb-6 text-gray-600">
+                        Überprüfe bitte deinen Spam-Ordner. Falls er dort nicht ist, kontaktiere uns direkt über das Kontaktformular.
+                    </div>
+                </details>
+                <!-- Item 2 -->
+                <details class="group border border-gray-200 rounded-lg bg-brand-cream open:bg-white transition-colors duration-300">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 font-medium text-brand-dark list-none">
+                        <span>Kann ich auch später zuschauen, wenn ich es zeitlich nicht schaffe?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="group-open:animate-fadeIn px-6 pb-6 text-gray-600">
+                        Nein, dies ist ein exklusives Live-Event. Es wird keine Aufzeichnung geben, um eine geschützte Atmosphäre für persönliche Fragen zu gewährleisten.
+                    </div>
+                </details>
+                 <!-- Item 3 -->
+                 <details class="group border border-gray-200 rounded-lg bg-brand-cream open:bg-white transition-colors duration-300">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 font-medium text-brand-dark list-none">
+                        <span>Gibt es eine Möglichkeit, meine spezifischen Pferdeprobleme direkt zu besprechen?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="group-open:animate-fadeIn px-6 pb-6 text-gray-600">
+                        Ja! Im Q&A-Teil der Show gehe ich auf individuelle Fragen ein.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration / Footer CTA -->
+    <section id="anmeldung" class="py-20 bg-gradient-to-b from-brand-primary to-brand-dark text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+                
+                <!-- Form Side -->
+                <div class="p-8 md:p-12 w-full md:w-3/5">
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-brand-dark mb-2">Sichere dir jetzt deinen Platz!</h2>
+                    <p class="text-gray-600 mb-6">Trage einfach deinen Namen und deine E-Mail ein, und du bist sofort dabei.</p>
+                    
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Danke für deine Anmeldung! (Demo)');">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Vorname *</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 text-brand-dark focus:ring-2 focus:ring-brand-primary focus:border-transparent outline-none transition" placeholder="Dein Vorname">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">E-Mail *</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 text-brand-dark focus:ring-2 focus:ring-brand-primary focus:border-transparent outline-none transition" placeholder="deine@email.com">
+                        </div>
+                        <div class="flex items-start gap-3 my-4">
+                            <input type="checkbox" class="mt-1 w-4 h-4 text-brand-primary rounded border-gray-300 focus:ring-brand-primary">
+                            <span class="text-xs text-gray-500 leading-tight">Ja, ich akzeptiere die Datenschutzerklärung und stimme zu, dass meine Daten zur Bearbeitung meiner Anfrage gespeichert werden.</span>
+                        </div>
+                        <button class="w-full bg-brand-primary hover:bg-brand-dark text-white font-bold py-4 rounded-lg transition duration-300 transform hover:scale-[1.02] shadow-lg">
+                            Jetzt kostenlos anmelden
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Info Side -->
+                <div class="bg-brand-cream p-8 md:p-12 w-full md:w-2/5 flex flex-col justify-center border-l border-gray-100">
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-white p-3 rounded-full shadow-sm text-brand-primary"><i class="fas fa-calendar-alt"></i></div>
+                            <div>
+                                <p class="text-sm text-gray-500 uppercase font-bold">Wann?</p>
+                                <p class="text-brand-dark font-semibold">13. November</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-white p-3 rounded-full shadow-sm text-brand-primary"><i class="fas fa-clock"></i></div>
+                            <div>
+                                <p class="text-sm text-gray-500 uppercase font-bold">Uhrzeit?</p>
+                                <p class="text-brand-dark font-semibold">20:00 Uhr</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-white p-3 rounded-full shadow-sm text-brand-primary"><i class="fas fa-video"></i></div>
+                            <div>
+                                <p class="text-sm text-gray-500 uppercase font-bold">Wo?</p>
+                                <p class="text-brand-dark font-semibold">Live per Zoom</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 pt-8 border-t border-gray-200">
+                            <p class="text-xs text-gray-500 text-center">
+                                Sei unbedingt live dabei, denn es gibt keine Aufzeichnung!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white py-12 border-t border-white/10">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="font-serif font-bold text-xl mb-2">Die Pferdedolmetscherin</p>
+                <p class="text-brand-light/60 text-sm">© 2025 Nicole Luzar. Alle Rechte vorbehalten.</p>
+            </div>
+            <div class="flex gap-6 text-sm text-brand-light/80">
+                <a href="#" class="hover:text-white transition">Impressum</a>
+                <a href="#" class="hover:text-white transition">Datenschutz</a>
+                <a href="#" class="hover:text-white transition">Kontakt</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
