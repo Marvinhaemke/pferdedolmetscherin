@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Heilwissen für Mensch und Pferd - Mobile Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* Removes grey tap highlight on iOS */
+        }
+
+        :root {
+            --primary-brown: #8B4513;
+            --primary-light: #fdf6ec;
+            --action-orange: #D35400;
+            --action-active: #a04000;
+            --text-dark: #222222;
+            --text-gray: #555555;
+            --white: #ffffff;
+            --border-radius: 12px;
+            --spacing-unit: 20px;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            font-size: 18px; /* Large base font for readability */
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #faf9f6;
+            padding-bottom: 90px; /* Space for sticky footer */
+        }
+
+        h1, h2, h3 {
+            font-family: 'DM Serif Display', serif;
+            line-height: 1.2;
+            color: var(--primary-brown);
+        }
+
+        h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.8rem; margin-bottom: 1rem; }
+        h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--border-radius);
+        }
+
+        /* --- UTILS --- */
+        .container {
+            padding: 0 var(--spacing-unit);
+            max-width: 600px; /* Constraints width on tablets/desktop */
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 3rem 0;
+        }
+
+        .highlight {
+            color: var(--action-orange);
+            font-style: italic;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--white);
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 90;
+        }
+
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.2rem;
+            color: var(--primary-brown);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .hero-badge {
+            background: #e3f2fd;
+            color: #1565c0;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 12px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero-image-wrapper {
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* --- STICKY FOOTER CTA --- */
+        .sticky-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 15px var(--spacing-unit);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Fallback for iOS safe areas */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .sticky-footer {
+                padding-bottom: calc(15px + env(safe-area-inset-bottom));
+            }
+        }
+
+        .btn-main {
+            width: 100%;
+            background-color: var(--action-orange);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(211, 84, 0, 0.3);
+            transition: transform 0.1s;
+        }
+
+        .btn-main:active {
+            transform: scale(0.98);
+            background-color: var(--action-active);
+        }
+        
+        .timer-text {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+        }
+
+        /* --- TRUST BAR --- */
+        .trust-bar {
+            background: var(--white);
+            padding: 1.5rem 0;
+            overflow: hidden;
+        }
+        
+        .trust-scroller {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding-bottom: 10px; /* Hide scrollbar spacing */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE */
+        }
+        
+        .trust-scroller::-webkit-scrollbar { display: none; }
+
+        .trust-scroller img {
+            height: 35px;
+            width: auto;
+            opacity: 0.6;
+            flex-shrink: 0;
+        }
+
+        /* --- CARDS (Problems & Benefits) --- */
+        .card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 1rem;
+            border: 1px solid #eee;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* --- ABOUT --- */
+        .about-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .about-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-brown);
+        }
+
+        /* --- SWIPEABLE TESTIMONIALS --- */
+        .scroll-snap-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 20px;
+            margin: 0 -20px; /* Offset container padding */
+            padding: 0 20px 20px 20px; /* Add padding back to content */
+        }
+        
+        .testimonial-card {
+            flex: 0 0 85%; /* Shows a peek of next card */
+            scroll-snap-align: center;
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border: 1px solid #eee;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* --- FORM --- */
+        .form-wrapper {
+            background: var(--primary-light);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border: 2px solid #ecdac6;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px; /* Large touch target */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px; /* Prevents zoom on iOS */
+            background: var(--white);
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .checkbox-row input {
+            margin-top: 4px;
+            transform: scale(1.3);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.85rem;
+            color: #999;
+            background: #f0f0f0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="6d8efaf9b2a3d99a07d144909b3763f6.png" alt="Logo" style="height: 30px;">
+            
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <span class="hero-badge">Kostenfreie Live-Show</span>
+            <h1>Verstehe dein Pferd in <span class="highlight">100 Minuten</span></h1>
+            <p>Löse Probleme, für die kein Tierarzt eine Lösung findet – ohne Esoterik, rein biologisch fundiert.</p>
+            
+            <div class="hero-image-wrapper">
+                <img src="Nicole-Pferdedolmetscherin-mit_Pferd.jpg" alt="Nicole Luzar mit Pferd">
+            </div>
+
+            <!-- Anchor link that scrolls to form (button is actually in sticky footer, this is secondary) -->
+            <p style="font-size: 0.9rem; color: #666;">
+                📅 <strong>Live:</strong> 13. November, 20:00 Uhr<br>
+                📍 <strong>Ort:</strong> Online (Zoom)
+            </p>
+        </div>
+    </section>
+
+    <!-- Trust Bar (Scrollable on mobile) -->
+    <div class="trust-bar">
+        <div class="container">
+            <p style="font-size: 0.7rem; text-transform: uppercase; margin-bottom: 10px; color: #999; text-align: center;">Bekannt aus</p>
+            <div class="trust-scroller">
+                <!-- Added padding images for scroll effect -->
+                <img src="d8032593c5a62029ec1f8c71df1ff34d.jpg" alt="Hamburg 1">
+                <img src="7cf71bfd6a14a13157ab925c8ad8227e.jpg" alt="RheinMain TV">
+                <img src="eb454c7898ce1cbf1327137a30f0c736.png" alt="Pferdekult">
+                <img src="8f30c23212ab10806ca78f474d2739d5.png" alt="Kompetenz Zirkel">
+            </div>
+        </div>
+    </div>
+
+    <!-- Problems -->
+    <section class="section">
+        <div class="container">
+            <h2 style="text-align: center;">Kennst du das?</h2>
+            
+            <div class="card">
+                <span class="card-icon">🏥</span>
+                <h3>Ständige Krankheit</h3>
+                <p>Dein Pferd ist oft krank und der Tierarzt findet einfach keine Ursache.</p>
+            </div>
+            
+            <div class="card">
+                <span class="card-icon">🛑</span>
+                <h3>Plötzlich schwierig</h3>
+                <p>Dein Pferd ist plötzlich widerspenstig oder aggressiv.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">🤷‍♀️</span>
+                <h3>Ratlosigkeit</h3>
+                <p>Du hast Futter gewechselt, den Sattler gerufen, aber nichts hilft dauerhaft.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution -->
+    <section class="section" style="background: var(--white);">
+        <div class="container">
+            <h2>Die Lösung: Die FTA-Methode</h2>
+            <p style="margin-bottom: 1.5rem;">Als Diplom-Biologin habe ich eine Methode entwickelt, die Wissenschaft und Intuition verbindet.</p>
+            
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--action-orange); font-weight: bold;">✓</span>
+                    <strong>Ursachen finden:</strong> Nicht nur Symptome behandeln.
+                </li>
+                <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--action-orange); font-weight: bold;">✓</span>
+                    <strong>Systematisch:</strong> Fragen + Testen = Antwort.
+                </li>
+                <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--action-orange); font-weight: bold;">✓</span>
+                    <strong>Live-Demo:</strong> Ich zeige es dir direkt im Webinar.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section">
+        <div class="container">
+            <div class="about-header">
+                <img src="Nicole_mit_Dublin.jpg" alt="Nicole" class="about-avatar">
+                <div>
+                    <h3 style="margin: 0;">Nicole Luzar</h3>
+                    <p style="font-size: 0.9rem; color: #666;">Diplom-Biologin</p>
+                </div>
+            </div>
+            <p>Seit 15 Jahren helfe ich Pferdebesitzern, ihre Tiere wirklich zu verstehen. Ich bin keine "Pferdeflüsterin", ich arbeite mit biologischen und energetischen Fakten.</p>
+        </div>
+    </section>
+
+    <!-- Testimonials Swipe -->
+    <section class="section" style="background: #fff8f0;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 1.5rem;">Erfolgsgeschichten</h2>
+            <!-- Horizontal Scroll Container -->
+            <div class="scroll-snap-container">
+                <div class="testimonial-card">
+                    <div style="color: #f1c40f; margin-bottom: 10px;">★★★★★</div>
+                    <p style="font-style: italic; margin-bottom: 10px;">"Mein Wallach läuft endlich wieder klar. Danke Nicole!"</p>
+                    <strong>- Sabine Z.</strong>
+                </div>
+                <div class="testimonial-card">
+                    <div style="color: #f1c40f; margin-bottom: 10px;">★★★★★</div>
+                    <p style="font-style: italic; margin-bottom: 10px;">"Kein Blabla, sondern echte Hilfe. Sehr zu empfehlen."</p>
+                    <strong>- Katrin M.</strong>
+                </div>
+                <div class="testimonial-card">
+                    <div style="color: #f1c40f; margin-bottom: 10px;">★★★★★</div>
+                    <p style="font-style: italic; margin-bottom: 10px;">"Ich habe so viel Geld gespart, weil ich jetzt weiß, was los ist."</p>
+                    <strong>- Anna S.</strong>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.8rem; color: #999;">← Wischen für mehr →</p>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section class="section" id="anmeldung">
+        <div class="container">
+            <div class="form-wrapper">
+                <h2 style="text-align: center;">Kostenlos dabei sein</h2>
+                <div style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 8px; font-size: 0.9rem; text-align: center; margin-bottom: 20px;">
+                    ⚠️ Keine Aufzeichnung! Nur Live.
+                </div>
+
+                <form id="mobileForm">
+                    <div class="input-group">
+                        <label>Dein Vorname</label>
+                        <input type="text" placeholder="Vorname" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Deine E-Mail</label>
+                        <input type="email" placeholder="E-Mail Adresse" required>
+                    </div>
+
+                    <div class="checkbox-row">
+                        <input type="checkbox" required>
+                        <label>Ich stimme der Datenschutzerklärung zu.</label>
+                    </div>
+
+                    <!-- Spacer for the sticky button so content isn't hidden behind it -->
+                    <div style="height: 20px;"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            &copy; 2025 Nicole Luzar<br>
+            <a href="#" style="color: #999;">Impressum</a> | <a href="#" style="color: #999;">Datenschutz</a>
+        </div>
+    </footer>
+
+    <!-- STICKY ACTION BAR -->
+    <div class="sticky-footer">
+        <div class="timer-text" id="spotsText">Nur noch wenige Plätze frei!</div>
+        <button type="button" class="btn-main" onclick="scrollToForm()">Jetzt Platz sichern</button>
+    </div>
+
+    <script>
+        // Scroll to form logic
+        function scrollToForm() {
+            const formSection = document.getElementById('anmeldung');
+            const formInput = document.querySelector('#mobileForm input');
+            
+            // Check if we are already at the form
+            const rect = formSection.getBoundingClientRect();
+            if (rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)) {
+                // If form is visible, submit behavior (mockup)
+                document.getElementById('mobileForm').requestSubmit();
+            } else {
+                // Scroll to form
+                formSection.scrollIntoView({ behavior: 'smooth' });
+                // Optional: focus input after scroll
+                setTimeout(() => formInput.focus(), 800);
+            }
+        }
+
+        // Form Submit Handler
+        document.getElementById('mobileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.querySelector('.btn-main');
+            btn.innerHTML = "Wird angemeldet...";
+            btn.style.background = "#555";
+            
+            setTimeout(() => {
+                btn.innerHTML = "Angemeldet! ✓";
+                btn.style.background = "#27ae60";
+                alert("Vielen Dank! Du bist angemeldet.");
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
