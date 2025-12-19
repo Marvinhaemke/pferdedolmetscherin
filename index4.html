@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Heilwissen für Mensch und Pferd - Mobile Edition</title>
+    <title>Heilwissen für Mensch und Pferd - Mobile & Desktop Optimized</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* --- RESET & VARIABLES --- */
@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent; /* Removes grey tap highlight on iOS */
+            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
@@ -28,11 +28,11 @@
 
         body {
             font-family: 'Lato', sans-serif;
-            font-size: 18px; /* Large base font for readability */
+            font-size: 18px;
             line-height: 1.6;
             color: var(--text-dark);
             background-color: #faf9f6;
-            padding-bottom: 90px; /* Space for sticky footer */
+            padding-bottom: 90px;
         }
 
         h1, h2, h3 {
@@ -55,8 +55,10 @@
         /* --- UTILS --- */
         .container {
             padding: 0 var(--spacing-unit);
-            max-width: 600px; /* Constraints width on tablets/desktop */
             margin: 0 auto;
+            width: 100%;
+            /* Mobile default: fluid width. 
+               Desktop: We limit it below in media queries */
         }
 
         .section {
@@ -133,7 +135,6 @@
             align-items: center;
         }
         
-        /* Fallback for iOS safe areas */
         @supports (padding-bottom: env(safe-area-inset-bottom)) {
             .sticky-footer {
                 padding-bottom: calc(15px + env(safe-area-inset-bottom));
@@ -153,6 +154,7 @@
             text-decoration: none;
             box-shadow: 0 4px 10px rgba(211, 84, 0, 0.3);
             transition: transform 0.1s;
+            cursor: pointer;
         }
 
         .btn-main:active {
@@ -177,9 +179,9 @@
             display: flex;
             gap: 30px;
             overflow-x: auto;
-            padding-bottom: 10px; /* Hide scrollbar spacing */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE */
+            padding-bottom: 10px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
         
         .trust-scroller::-webkit-scrollbar { display: none; }
@@ -191,20 +193,26 @@
             flex-shrink: 0;
         }
 
-        /* --- CARDS (Problems & Benefits) --- */
+        /* --- CARDS & GRIDS --- */
         .card {
             background: var(--white);
             padding: 1.5rem;
             border-radius: var(--border-radius);
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-bottom: 1rem;
+            margin-bottom: 1rem; /* Margin for mobile stacking */
             border: 1px solid #eee;
+            height: 100%; /* Ensure equal height in grid */
         }
 
         .card-icon {
             font-size: 2rem;
             margin-bottom: 10px;
             display: block;
+        }
+
+        /* Wrapper for cards that allows grid on desktop */
+        .card-grid {
+            display: block; 
         }
 
         /* --- ABOUT --- */
@@ -223,25 +231,28 @@
             border: 3px solid var(--primary-brown);
         }
 
-        /* --- SWIPEABLE TESTIMONIALS --- */
+        /* --- TESTIMONIALS --- */
         .scroll-snap-container {
             display: flex;
             gap: 15px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             padding-bottom: 20px;
-            margin: 0 -20px; /* Offset container padding */
-            padding: 0 20px 20px 20px; /* Add padding back to content */
+            margin: 0 -20px;
+            padding: 0 20px 20px 20px;
         }
         
         .testimonial-card {
-            flex: 0 0 85%; /* Shows a peek of next card */
+            flex: 0 0 85%;
             scroll-snap-align: center;
             background: var(--white);
             padding: 20px;
             border-radius: var(--border-radius);
             border: 1px solid #eee;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         /* --- FORM --- */
@@ -250,6 +261,8 @@
             padding: 20px;
             border-radius: var(--border-radius);
             border: 2px solid #ecdac6;
+            max-width: 500px; /* Prevent form from getting too wide on desktop */
+            margin: 0 auto;
         }
 
         .input-group {
@@ -265,10 +278,10 @@
 
         .input-group input {
             width: 100%;
-            padding: 16px; /* Large touch target */
+            padding: 16px;
             border: 1px solid #ccc;
             border-radius: 8px;
-            font-size: 16px; /* Prevents zoom on iOS */
+            font-size: 16px;
             background: var(--white);
         }
 
@@ -294,6 +307,102 @@
             background: #f0f0f0;
         }
 
+        /* =========================================
+           DESKTOP UPGRADES (Media Queries)
+           ========================================= */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 1100px; /* Wider container for desktop */
+            }
+
+            /* Hero: Side-by-side */
+            .hero .container-inner {
+                display: grid;
+                grid-template-columns: 1.2fr 1fr; /* Text wider than image */
+                align-items: center;
+                gap: 50px;
+                text-align: left;
+            }
+            
+            .hero-image-wrapper {
+                margin: 0;
+                transform: rotate(2deg); /* Add a little style on desktop */
+                transition: transform 0.3s;
+            }
+            
+            .hero-image-wrapper:hover {
+                transform: rotate(0deg);
+            }
+
+            .hero h1 { font-size: 3rem; }
+            .hero p { font-size: 1.1rem; }
+
+            /* Grid Systems */
+            .card-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+            
+            .card { margin-bottom: 0; } /* Remove mobile margin */
+
+            /* Testimonials: Grid instead of Scroll */
+            .scroll-snap-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                overflow: visible;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .testimonial-card {
+                flex: auto; /* Reset flex sizing */
+            }
+
+            /* Hide the "Swipe" hint on desktop */
+            .swipe-hint { display: none; }
+
+            /* Trust Bar: Center items, no scroll */
+            .trust-scroller {
+                justify-content: center;
+                flex-wrap: wrap;
+                overflow: visible;
+            }
+
+            /* About Section: Grid */
+            .about-grid {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 30px;
+                align-items: center;
+            }
+            
+            .about-avatar {
+                width: 150px; /* Larger image on desktop */
+                height: 150px;
+            }
+            
+            .about-header {
+                display: block; /* Reset flex */
+                margin-bottom: 0;
+            }
+            
+            /* Sticky Footer: Make it smaller/less intrusive on big screens */
+            .sticky-footer {
+                padding: 10px;
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .sticky-footer .timer-text { margin-bottom: 0; }
+            
+            .btn-main {
+                width: auto; /* Auto width button */
+                padding: 12px 40px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -302,35 +411,37 @@
     <header>
         <div class="logo">
             <img src="6d8efaf9b2a3d99a07d144909b3763f6.png" alt="Logo" style="height: 30px;">
-            
         </div>
     </header>
 
     <!-- Hero -->
     <section class="hero">
         <div class="container">
-            <span class="hero-badge">Kostenfreie Live-Show</span>
-            <h1>Verstehe dein Pferd in <span class="highlight">100 Minuten</span></h1>
-            <p>Löse Probleme, für die kein Tierarzt eine Lösung findet – ohne Esoterik, rein biologisch fundiert.</p>
-            
-            <div class="hero-image-wrapper">
-                <img src="Nicole-Pferdedolmetscherin-mit_Pferd.jpg" alt="Nicole Luzar mit Pferd">
-            </div>
+            <!-- Added container-inner for grid layout on desktop -->
+            <div class="container-inner">
+                <div class="hero-content">
+                    <span class="hero-badge">Kostenfreie Live-Show</span>
+                    <h1>Verstehe dein Pferd in <span class="highlight">100 Minuten</span></h1>
+                    <p>Löse Probleme, für die kein Tierarzt eine Lösung findet – ohne Esoterik, rein biologisch fundiert.</p>
+                    
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 20px;">
+                        📅 <strong>Live:</strong> 13. November, 20:00 Uhr<br>
+                        📍 <strong>Ort:</strong> Online (Zoom)
+                    </p>
+                </div>
 
-            <!-- Anchor link that scrolls to form (button is actually in sticky footer, this is secondary) -->
-            <p style="font-size: 0.9rem; color: #666;">
-                📅 <strong>Live:</strong> 13. November, 20:00 Uhr<br>
-                📍 <strong>Ort:</strong> Online (Zoom)
-            </p>
+                <div class="hero-image-wrapper">
+                    <img src="Nicole-Pferdedolmetscherin-mit_Pferd.jpg" alt="Nicole Luzar mit Pferd">
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Trust Bar (Scrollable on mobile) -->
+    <!-- Trust Bar -->
     <div class="trust-bar">
         <div class="container">
             <p style="font-size: 0.7rem; text-transform: uppercase; margin-bottom: 10px; color: #999; text-align: center;">Bekannt aus</p>
             <div class="trust-scroller">
-                <!-- Added padding images for scroll effect -->
                 <img src="d8032593c5a62029ec1f8c71df1ff34d.jpg" alt="Hamburg 1">
                 <img src="7cf71bfd6a14a13157ab925c8ad8227e.jpg" alt="RheinMain TV">
                 <img src="eb454c7898ce1cbf1327137a30f0c736.png" alt="Pferdekult">
@@ -344,22 +455,24 @@
         <div class="container">
             <h2 style="text-align: center;">Kennst du das?</h2>
             
-            <div class="card">
-                <span class="card-icon">🏥</span>
-                <h3>Ständige Krankheit</h3>
-                <p>Dein Pferd ist oft krank und der Tierarzt findet einfach keine Ursache.</p>
-            </div>
-            
-            <div class="card">
-                <span class="card-icon">🛑</span>
-                <h3>Plötzlich schwierig</h3>
-                <p>Dein Pferd ist plötzlich widerspenstig oder aggressiv.</p>
-            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <span class="card-icon">🏥</span>
+                    <h3>Ständige Krankheit</h3>
+                    <p>Dein Pferd ist oft krank und der Tierarzt findet einfach keine Ursache.</p>
+                </div>
+                
+                <div class="card">
+                    <span class="card-icon">🛑</span>
+                    <h3>Plötzlich schwierig</h3>
+                    <p>Dein Pferd ist plötzlich widerspenstig oder aggressiv.</p>
+                </div>
 
-            <div class="card">
-                <span class="card-icon">🤷‍♀️</span>
-                <h3>Ratlosigkeit</h3>
-                <p>Du hast Futter gewechselt, den Sattler gerufen, aber nichts hilft dauerhaft.</p>
+                <div class="card">
+                    <span class="card-icon">🤷‍♀️</span>
+                    <h3>Ratlosigkeit</h3>
+                    <p>Du hast Futter gewechselt, den Sattler gerufen, aber nichts hilft dauerhaft.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -367,63 +480,73 @@
     <!-- Solution -->
     <section class="section" style="background: var(--white);">
         <div class="container">
-            <h2>Die Lösung: Die FTA-Methode</h2>
-            <p style="margin-bottom: 1.5rem;">Als Diplom-Biologin habe ich eine Methode entwickelt, die Wissenschaft und Intuition verbindet.</p>
-            
-            <ul style="list-style: none; padding-left: 0;">
-                <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                    <span style="position: absolute; left: 0; color: var(--action-orange); font-weight: bold;">✓</span>
-                    <strong>Ursachen finden:</strong> Nicht nur Symptome behandeln.
-                </li>
-                <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                    <span style="position: absolute; left: 0; color: var(--action-orange); font-weight: bold;">✓</span>
-                    <strong>Systematisch:</strong> Fragen + Testen = Antwort.
-                </li>
-                <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                    <span style="position: absolute; left: 0; color: var(--action-orange); font-weight: bold;">✓</span>
-                    <strong>Live-Demo:</strong> Ich zeige es dir direkt im Webinar.
-                </li>
-            </ul>
+            <div class="container-inner" style="max-width: 800px; margin: 0 auto;">
+                <h2>Die Lösung: Die FTA-Methode</h2>
+                <p style="margin-bottom: 1.5rem;">Als Diplom-Biologin habe ich eine Methode entwickelt, die Wissenschaft und Intuition verbindet.</p>
+                
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--action-orange); font-weight: bold;">✓</span>
+                        <strong>Ursachen finden:</strong> Nicht nur Symptome behandeln.
+                    </li>
+                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--action-orange); font-weight: bold;">✓</span>
+                        <strong>Systematisch:</strong> Fragen + Testen = Antwort.
+                    </li>
+                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--action-orange); font-weight: bold;">✓</span>
+                        <strong>Live-Demo:</strong> Ich zeige es dir direkt im Webinar.
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
 
     <!-- About -->
     <section class="section">
         <div class="container">
-            <div class="about-header">
-                <img src="Nicole_mit_Dublin.jpg" alt="Nicole" class="about-avatar">
+            <div class="about-grid">
+                <div class="about-header">
+                    <img src="Nicole_mit_Dublin.jpg" alt="Nicole" class="about-avatar">
+                </div>
                 <div>
-                    <h3 style="margin: 0;">Nicole Luzar</h3>
-                    <p style="font-size: 0.9rem; color: #666;">Diplom-Biologin</p>
+                    <h3>Nicole Luzar</h3>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px; font-weight: 700;">Diplom-Biologin</p>
+                    <p>Seit 15 Jahren helfe ich Pferdebesitzern, ihre Tiere wirklich zu verstehen. Ich bin keine "Pferdeflüsterin", ich arbeite mit biologischen und energetischen Fakten.</p>
                 </div>
             </div>
-            <p>Seit 15 Jahren helfe ich Pferdebesitzern, ihre Tiere wirklich zu verstehen. Ich bin keine "Pferdeflüsterin", ich arbeite mit biologischen und energetischen Fakten.</p>
         </div>
     </section>
 
-    <!-- Testimonials Swipe -->
+    <!-- Testimonials -->
     <section class="section" style="background: #fff8f0;">
         <div class="container">
             <h2 style="text-align: center; margin-bottom: 1.5rem;">Erfolgsgeschichten</h2>
-            <!-- Horizontal Scroll Container -->
+            
             <div class="scroll-snap-container">
                 <div class="testimonial-card">
-                    <div style="color: #f1c40f; margin-bottom: 10px;">★★★★★</div>
-                    <p style="font-style: italic; margin-bottom: 10px;">"Mein Wallach läuft endlich wieder klar. Danke Nicole!"</p>
+                    <div>
+                        <div style="color: #f1c40f; margin-bottom: 10px;">★★★★★</div>
+                        <p style="font-style: italic; margin-bottom: 10px;">"Mein Wallach läuft endlich wieder klar. Danke Nicole!"</p>
+                    </div>
                     <strong>- Sabine Z.</strong>
                 </div>
                 <div class="testimonial-card">
-                    <div style="color: #f1c40f; margin-bottom: 10px;">★★★★★</div>
-                    <p style="font-style: italic; margin-bottom: 10px;">"Kein Blabla, sondern echte Hilfe. Sehr zu empfehlen."</p>
+                    <div>
+                        <div style="color: #f1c40f; margin-bottom: 10px;">★★★★★</div>
+                        <p style="font-style: italic; margin-bottom: 10px;">"Kein Blabla, sondern echte Hilfe. Sehr zu empfehlen."</p>
+                    </div>
                     <strong>- Katrin M.</strong>
                 </div>
                 <div class="testimonial-card">
-                    <div style="color: #f1c40f; margin-bottom: 10px;">★★★★★</div>
-                    <p style="font-style: italic; margin-bottom: 10px;">"Ich habe so viel Geld gespart, weil ich jetzt weiß, was los ist."</p>
+                    <div>
+                        <div style="color: #f1c40f; margin-bottom: 10px;">★★★★★</div>
+                        <p style="font-style: italic; margin-bottom: 10px;">"Ich habe so viel Geld gespart, weil ich jetzt weiß, was los ist."</p>
+                    </div>
                     <strong>- Anna S.</strong>
                 </div>
             </div>
-            <p style="text-align: center; font-size: 0.8rem; color: #999;">← Wischen für mehr →</p>
+            <p class="swipe-hint" style="text-align: center; font-size: 0.8rem; color: #999;">← Wischen für mehr →</p>
         </div>
     </section>
 
@@ -452,7 +575,7 @@
                         <label>Ich stimme der Datenschutzerklärung zu.</label>
                     </div>
 
-                    <!-- Spacer for the sticky button so content isn't hidden behind it -->
+                    <!-- Spacer for the sticky button so content isn't hidden behind it on mobile -->
                     <div style="height: 20px;"></div>
                 </form>
             </div>
@@ -474,25 +597,19 @@
     </div>
 
     <script>
-        // Scroll to form logic
         function scrollToForm() {
             const formSection = document.getElementById('anmeldung');
             const formInput = document.querySelector('#mobileForm input');
             
-            // Check if we are already at the form
             const rect = formSection.getBoundingClientRect();
             if (rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)) {
-                // If form is visible, submit behavior (mockup)
                 document.getElementById('mobileForm').requestSubmit();
             } else {
-                // Scroll to form
                 formSection.scrollIntoView({ behavior: 'smooth' });
-                // Optional: focus input after scroll
                 setTimeout(() => formInput.focus(), 800);
             }
         }
 
-        // Form Submit Handler
         document.getElementById('mobileForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = document.querySelector('.btn-main');
