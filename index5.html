@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Heilwissen für Mensch und Pferd - Exclusive Live Show</title>
+    <!-- Fonts: Playfair (Luxury Serif), Montserrat (Clean Sans), Great Vibes (Script) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-dark: #111111;
+            --bg-light: #ffffff;
+            --bg-cream: #f9f6f0;
+            
+            --text-gold: #c5a059;
+            --text-light: #f0f0f0;
+            --text-dark: #222222;
+            
+            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f1c40f 50%, #b8860b 100%);
+            --gold-border: 1px solid #d4af37;
+            
+            --spacing: 25px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            padding-bottom: 80px; /* Space for sticky footer */
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 { font-size: 2.4rem; margin-bottom: 1rem; }
+        h2 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
+        h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+
+        .script-font {
+            font-family: 'Great Vibes', cursive;
+            color: var(--text-gold);
+            font-size: 2rem;
+            text-transform: none;
+            letter-spacing: 0;
+            display: block;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            padding: 0 var(--spacing);
+            max-width: 800px; /* Narrower reading column for mobile feel on desktop */
+            margin: 0 auto;
+        }
+
+        .text-center { text-align: center; }
+        .text-gold { color: var(--text-gold); }
+        
+        .gold-divider {
+            height: 2px;
+            width: 80px;
+            background: var(--gold-gradient);
+            margin: 20px auto;
+            border: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-gold {
+            display: block;
+            width: 100%;
+            background: var(--gold-gradient);
+            color: #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 18px 20px;
+            border: none;
+            border-radius: 4px; /* Sharper corners for luxury feel */
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-gold:active {
+            transform: scale(0.98);
+        }
+
+        /* --- HEADER --- */
+        .top-bar {
+            background: #000;
+            color: var(--text-gold);
+            text-align: center;
+            padding: 10px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- HERO SECTION (Dark Mode) --- */
+        .hero {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: 3rem 0 4rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::after {
+            /* Gold border bottom */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gold-gradient);
+        }
+
+        .hero-img-container {
+            margin: 20px auto;
+            border: 2px solid var(--text-gold);
+            padding: 10px; /* Frame effect */
+            display: inline-block;
+        }
+
+        .hero h1 span {
+            color: var(--text-gold);
+            font-style: italic;
+        }
+
+        /* --- PROBLEMS SECTION (White) --- */
+        .section-light {
+            padding: 4rem 0;
+            background: var(--bg-light);
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #eee;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .check-icon {
+            color: var(--text-gold);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            line-height: 1;
+        }
+
+        /* --- METHOD SECTION (Dark) --- */
+        .section-dark {
+            padding: 4rem 0;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .method-card {
+            border: 1px solid var(--text-gold);
+            padding: 30px;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* --- TESTIMONIALS (Cream) --- */
+        .section-cream {
+            padding: 4rem 0;
+            background: var(--bg-cream);
+        }
+
+        .testimonial-box {
+            background: #fff;
+            padding: 30px;
+            border-top: 5px solid var(--text-gold);
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .stars { color: var(--text-gold); margin-bottom: 10px; letter-spacing: 3px; }
+        .quote { font-style: italic; font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 15px; }
+        .author { font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
+
+        /* --- ABOUT (Image Left, Text Right on Desktop) --- */
+        .about-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 50%;
+            border: 4px solid var(--text-gold);
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* --- FORM --- */
+        .form-container {
+            background: #fff;
+            padding: 30px;
+            border: 2px solid var(--text-gold);
+            position: relative;
+        }
+        
+        .form-container::before {
+            content: 'EXCLUSIVE ACCESS';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-dark);
+            color: var(--text-gold);
+            padding: 0 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            background: #fdfdfd;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--text-gold);
+        }
+
+        /* --- STICKY FOOTER --- */
+        .sticky-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            z-index: 1000;
+            border-top: 1px solid var(--text-gold);
+            display: flex;
+            justify-content: center;
+        }
+        
+        .sticky-btn-wrapper {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* --- DESKTOP TWEAKS --- */
+        @media (min-width: 768px) {
+            .container { max-width: 1000px; }
+            
+            .hero-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 50px;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .hero-img-container { margin: 0; }
+            .hero h1 { font-size: 3.5rem; }
+            .gold-divider { margin-left: 0; }
+
+            .about-flex {
+                flex-direction: row;
+                text-align: left;
+            }
+            
+            .grid-3 {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        Kostenfreie Live-Masterclass mit Nicole Luzar
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-content">
+            <div>
+                <span class="script-font">Endlich Klarheit</span>
+                <h1>Verstehe dein Pferd in <br><span>100 Minuten</span></h1>
+                <hr class="gold-divider">
+                <p style="margin-bottom: 25px; opacity: 0.9; font-weight: 300;">
+                    Die exklusive Live-Show für anspruchsvolle Pferdebesitzer, die Ursachen lösen wollen, wo Tierärzte ratlos sind.
+                </p>
+                <!-- Desktop Button (Hidden on mobile usually, but good to have) -->
+                <div style="display: none; @media(min-width:768px){display:block;}">
+                     <a href="#register" class="btn-gold" style="display: inline-block; width: auto; padding: 15px 40px;">Jetzt Platz sichern</a>
+                </div>
+            </div>
+            
+            <div class="hero-img-container">
+                <img src="Nicole-Pferdedolmetscherin-mit_Pferd.jpg" alt="Nicole Luzar" style="max-height: 400px; object-fit: cover;">
+            </div>
+        </div>
+    </header>
+
+    <!-- Problem Section -->
+    <section class="section-light">
+        <div class="container">
+            <h2>Kennst du diese <span class="text-gold">Situation?</span></h2>
+            <p class="text-center" style="max-width: 600px; margin: 0 auto 40px auto;">
+                Du liebst dein Pferd über alles, doch momentan fühlst du dich machtlos gegen Probleme, die einfach nicht verschwinden wollen.
+            </p>
+
+            <div class="check-item">
+                <div class="check-icon">✕</div>
+                <div>
+                    <h3>Ständige Krankheit</h3>
+                    <p>Dein Pferd zeigt immer wieder Symptome, aber selbst Spezialisten finden keine physische Ursache.</p>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <div class="check-icon">✕</div>
+                <div>
+                    <h3>Plötzliche Wesensänderung</h3>
+                    <p>Dein einstiger Partner wirkt plötzlich distanziert, aggressiv oder lustlos.</p>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <div class="check-icon">✕</div>
+                <div>
+                    <h3>Frust & Angst</h3>
+                    <p>Du hast Angst, etwas zu übersehen, und der Frust wächst mit jedem erfolglosen Versuch.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method Section (Dark) -->
+    <section class="section-dark">
+        <div class="container">
+            <span class="script-font">Der neue Weg</span>
+            <h2>Die FTA-Methode</h2>
+            <hr class="gold-divider">
+            <p style="margin-bottom: 40px;">
+                Eine revolutionäre Verbindung aus fundierter Biologie und energetischer Kommunikation.
+            </p>
+
+            <div class="grid-3">
+                <div class="method-card">
+                    <h3 class="text-gold">01. Fragen</h3>
+                    <p>Wir nutzen gezielte Kommunikation, um den wahren Kern des Problems zu isolieren.</p>
+                </div>
+                <div class="method-card">
+                    <h3 class="text-gold">02. Testen</h3>
+                    <p>Systematische Überprüfung der Ursachen – von körperlich bis emotional.</p>
+                </div>
+                <div class="method-card">
+                    <h3 class="text-gold">03. Antworten</h3>
+                    <p>Klare Ergebnisse und ein Handlungsplan, der sofort umsetzbar ist.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section-light">
+        <div class="container">
+            <div class="about-flex">
+                <img src="Nicole_mit_Dublin.jpg" class="about-img" alt="Nicole Portrait">
+                <div>
+                    <span class="script-font" style="font-size: 1.5rem; color: var(--text-dark);">Über deine Expertin</span>
+                    <h2 style="text-align: left; margin-bottom: 15px;">Nicole Luzar</h2>
+                    <p><strong>Diplom-Biologin & Pferde-Expertin</strong></p>
+                    <p style="margin-top: 15px;">
+                        "Ich glaube nicht an Zufälle. Wenn dein Pferd 'schwierig' ist, versucht es dir etwas zu sagen. Als Biologin übersetze ich diese Botschaften für dich – ohne Esoterik-Kitsch, sondern mit Fakten und Herz."
+                    </p>
+                    <div style="margin-top: 20px; display: flex; gap: 15px;">
+                        <img src="d8032593c5a62029ec1f8c71df1ff34d.jpg" style="height: 30px; opacity: 0.5;">
+                        <img src="7cf71bfd6a14a13157ab925c8ad8227e.jpg" style="height: 30px; opacity: 0.5;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="section-cream">
+        <div class="container">
+            <h2>Stimmen der <span class="text-gold">Teilnehmer</span></h2>
+            <div class="grid-3">
+                <div class="testimonial-box">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"Eine Offenbarung. Endlich verstehe ich die Zusammenhänge."</p>
+                    <p class="author">Sabine Z.</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"Hochprofessionell und doch so herzlich. Meinem Pferd geht es blendend."</p>
+                    <p class="author">Katrin M.</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"Ich war skeptisch, aber die Ergebnisse sind unbestreitbar."</p>
+                    <p class="author">Anna S.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration -->
+    <section id="register" class="section-light" style="padding-bottom: 40px;">
+        <div class="container">
+            <div class="form-container">
+                <h2 style="margin-bottom: 10px;">Deine Einladung</h2>
+                <p class="text-center" style="margin-bottom: 25px;">
+                    Sichere dir jetzt deinen kostenfreien Zugang zur Live-Show.
+                    <br><span style="color: red; font-size: 0.9rem;">(Keine Aufzeichnung verfügbar)</span>
+                </p>
+
+                <form onsubmit="event.preventDefault(); alert('Angemeldet!');">
+                    <input type="text" placeholder="Dein Vorname" required>
+                    <input type="email" placeholder="Deine E-Mail Adresse" required>
+                    
+                    <div style="display: flex; gap: 10px; align-items: flex-start; margin-bottom: 20px; font-size: 0.85rem;">
+                        <input type="checkbox" style="margin-top: 5px;" required>
+                        <label>Ich stimme der Datenverarbeitung gemäß Datenschutzerklärung zu.</label>
+                    </div>
+
+                    <!-- Button is in sticky footer for mobile, but visible here for desktop logic or fallback -->
+                    <div style="height: 20px;"></div> 
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky Footer CTA -->
+    <div class="sticky-footer">
+        <div class="sticky-btn-wrapper">
+            <button class="btn-gold" onclick="document.querySelector('form').scrollIntoView({behavior: 'smooth'})">
+                Jetzt kostenlos anmelden
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>
